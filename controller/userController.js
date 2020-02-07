@@ -2,9 +2,9 @@ const User = require("../models/employee");
 const db = require("../utility/dbConnection");
 const userControl = {};
 const formdata = {
-  firstName: "sai",
+  firstName: "srinivas",
   lastName: "ruthvik",
-  age: 23,
+  age: 28,
   ssn: 3823928,
   profession: "Systems Engineer"
 };
@@ -65,17 +65,17 @@ userControl.insertRecords = async function(req, res, next) {
       }
     ]);
   });
-  res.redirect("/");
+  res.redirect("/users");
 };
 
 userControl.getRecords = function(req, res, next) {
   console.log(req.query);
-  User.findAll(
-    pagenate(parseInt(req.query.page), parseInt(req.query.pagesize))
-  ).then(users => {
-    console.log("All users:", JSON.stringify(users, null, 4));
-    res.json(users);
-  });
+  User.findAll(pagenate(parseInt(req.query.page), parseInt(req.query.pagesize)))
+    .then(users => {
+      console.log("All users:", JSON.stringify(users, null, 4));
+      res.json(users);
+    })
+    .catch(err => console.log(err.message));
 };
 
 userControl.getRecord = function(req, res) {
@@ -83,19 +83,22 @@ userControl.getRecord = function(req, res) {
     where: {
       id: req.params.id
     }
-  }).then(user => res.json(user));
+  })
+    .then(user => res.json(user))
+    .catch(err => console.log(err.message));
 };
 
-userControl.postRecord = async function(req, res) {
-  await User.create(formdata);
-  res.send("new record inserted");
+userControl.postRecord = function(req, res) {
+  // console.log("execution");
+  // console.log(formdata);
+  // await User.create(formdata);
+  res.render("Signinform", { student: formdata });
 };
 
 userControl.updateRecord = function(req, res) {
-  User.update(
-    { age: 27, ssn: 143134 },
-    { where: { id: req.params.id } }
-  ).then(updated => res.json(updated));
+  User.update({ age: 27, ssn: 143134 }, { where: { id: req.params.id } })
+    .then(updated => res.render(updated))
+    .catch(err => console.log(err.message));
 };
 
 userControl.deleteRecord = function(req, res) {
@@ -103,7 +106,9 @@ userControl.deleteRecord = function(req, res) {
     where: {
       id: req.params.id
     }
-  }).then(() => res.send(`user with id: ${req.params.id}, was deleted`));
+  })
+    .then(() => res.send(`user with id: ${req.params.id}, was deleted`))
+    .catch(err => console.log(err.message));
 };
 
 module.exports = userControl;

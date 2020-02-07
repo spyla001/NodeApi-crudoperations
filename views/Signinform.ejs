@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            width:80%;
+            margin:0 auto;
+            background-image:url("https://previews.123rf.com/images/thampapon1/thampapon11210/thampapon1121000108/15991001-background-of-technology-with-earth-globe.jpg");
+            color:white;
+            text-align:center;
+        }
+        .row{
+        display: flex;
+        }
+        .col1{
+        width:50%;
+        text-align:right;
+        vertical-align: top;
+        }
+        .col2{
+        width:50%;
+        text-align:left;
+        vertical-align: top;
+        margin-left:2%;
+        }
+        .container{
+            width:100%;
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to tabner</h1>
+<p>please verify your details.....</p>
+<div class="container">
+    <div class="row">
+        <div class="col1">
+            <h1>First Name:</h1>
+        </div>
+        <div class="col2">
+            <h1><%= student.firstName%></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col1">
+            <h1>Last Name:</h1>
+        </div>
+        <div class="col2">
+            <h1><%=student.lastName%></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col1">
+            <h1>Age:</h1>
+        </div>
+        <div class="col2">
+            <h1><%= student.age%></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col1">
+            <h1>SSN:</h1>
+        </div>
+        <div class="col2">
+            <h1><%=student.ssn%></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col1">
+            <h1>Profession:</h1>
+        </div>
+        <div class="col2">
+            <h1><%=student.profession%></h1>
+        </div>
+    </div>
+</div>
+</body>
+</html>
